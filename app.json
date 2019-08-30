@@ -1,0 +1,20 @@
+{
+    "name": "Spotify token handling",
+    "description": "An implementation of the authorization code flow",
+    "repository": "https://github.com/alfiedouglas0/spotify-token-refresh",
+    "keywords": ["spotify", "token", "refresh", "swap"],
+    "env": {
+        "SPOTIFY_CLIENT_ID": {
+            "description": "Your spotify app id, found the spotify developer dashboard."
+        },
+        "SPOTIFY_CLIENT_SECRET": {
+            "description": "Your spotify client secret, found the spotify developer dashboard."
+        },
+        "ENCRYPTION_SECRET": {
+            "description": "Any arbitrary string to use to encrypt/decrypt refresh tokens."
+        },
+        "SPOTIFY_CLIENT_CALLBACK": {
+            "description": "Your spotify app redirect URL, found the spotify developer dashboard."
+        }
+    }
+}
