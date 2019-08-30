@@ -1,0 +1,12 @@
+{
+    "name": "spotify-token-refresh",
+    "version": "1.0.0",
+    "description": "Server that handles spotify token swaping and refreshing",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.16.2"
+    }
+}
