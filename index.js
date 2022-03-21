@@ -139,8 +139,6 @@ app.post('/swap', async (req, res) => {
         // send response
         res.status(response.statusCode).json(result);
     } catch (error) {
-        console.log(error)
-        
         if (error.response) {
             res.status(error.response.statusCode);
         } else {
@@ -189,8 +187,6 @@ app.post('/refresh', async (req, res) => {
         // send response
         res.status(response.statusCode).json(result);
     } catch (error) {
-        console.log(error)
-
         if (error.response) {
             res.status(error.response.statusCode);
         } else {
