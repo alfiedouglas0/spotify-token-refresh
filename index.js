@@ -23,17 +23,23 @@ const spotifyEndpoint = 'https://accounts.spotify.com/api/token';
 // encryption
 const encSecret = process.env.ENCRYPTION_SECRET;
 const encMethod = process.env.ENCRYPTION_METHOD || "aes-256-ctr";
+const IV_LENGTH = 16;
+
 const encrypt = (text) => {
-    const aes = crypto.createCipher(encMethod, encSecret);
-    let encrypted = aes.update(text, 'utf8', 'hex');
-    encrypted += aes.final('hex');
-    return encrypted;
+    let iv = crypto.randomBytes(IV_LENGTH);
+    let cipher = crypto.createCipheriv(encMethod, spClientSecret, iv);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return iv.toString('hex') + ':' + encrypted.toString('hex');
 };
 const decrypt = (text) => {
-    const aes = crypto.createDecipher(encMethod, encSecret);
-    let decrypted = aes.update(text, 'hex', 'utf8');
-    decrypted += aes.final('utf8');
-    return decrypted;
+    let textParts = text.split(':');
+    let iv = Buffer.from(textParts.shift(), 'hex');
+    let encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    let decipher = crypto.createDecipheriv(encMethod, spClientSecret, iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
 };
 
 // handle sending POST request
